@@ -627,7 +627,7 @@ def create_model(bert_config, is_training, input_ids, input_mask, segment_ids,
   with tf.variable_scope("loss"):
     if is_training:
       # I.e., 0.1 dropout
-      output_layer = mtf.dropout(output_layer, keep_prob=0.9)
+      output_layer = mtf.dropout(output_layer, is_training, keep_prob=0.9)
     logits = mtf.einsum([output_layer, output_weights],
                         reduced_dims=[hidden_dim])
     logits = logits + output_bias
